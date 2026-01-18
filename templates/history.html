@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4 fade-in">
+
+    <h3 class="text-center fw-bold mb-4">
+        История тренировок
+    </h3>
+
+    {% if history %}
+        {% for day, logs in history.items() %}
+        <div class="card shadow-sm mb-3 workout-card {% if loop.index == 2 %}delay-1{% elif loop.index == 3 %}delay-2{% endif %}">
+            <div class="card-body">
+                <h5>
+                    {% if day == 'A' %}
+                        <i class="bi bi-lightning-charge-fill text-success"></i>
+                        День A — Верх тела + корпус
+                    {% elif day == 'B' %}
+                        <i class="bi bi-diagram-3-fill text-danger"></i>
+                        День B — Низ + задняя цепь + корпус
+                    {% elif day == 'C' %}
+                        <i class="bi bi-fire text-warning"></i>
+                        День C — Плечи, руки, метаболика + HIIT
+                    {% endif %}
+                </h5>
+
+                <ul class="list-group list-group-flush">
+                    {% for log in logs %}
+                    <li class="list-group-item dark-item">
+                        {% if log.exercise == 'Подтягивания' or log.exercise == 'Подтягивания узкие' %}
+                            <i class="bi bi-person-arms-up"></i>
+                        {% elif log.exercise == 'Жим лёжа' %}
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                        {% elif log.exercise == 'Тяга штанги в наклоне' %}
+                            <i class="bi bi-arrow-down-up"></i>
+                        {% elif log.exercise == 'Жим гантелей под углом' %}
+                            <i class="bi bi-arrows-angle-expand"></i>
+                        {% elif log.exercise == 'Face Pull' or log.exercise == 'Тяга к лицу' %}
+                            <i class="bi bi-shield-check"></i>
+                        {% elif log.exercise == 'Пресс' or log.exercise == 'Пресс / вакуум' %}
+                            <i class="bi bi-heart-pulse"></i>
+                        {% elif log.exercise == 'Планка / боковая планка' %}
+                            <i class="bi bi-arrows-angle-contract"></i>
+                        {% elif log.exercise == 'Становая тяга' %}
+                            <i class="bi bi-arrow-down"></i>
+                        {% elif log.exercise == 'Болгарские сплит-приседы' %}
+                            <i class="bi bi-universal-access"></i>
+                        {% elif log.exercise == 'Гиперэкстензия' %}
+                            <i class="bi bi-arrow-repeat"></i>
+                        {% elif log.exercise == 'Икры' %}
+                            <i class="bi bi-caret-up-fill"></i>
+                        {% elif log.exercise == 'Мостик / ягодичный мост' %}
+                            <i class="bi bi-arrow-up-square"></i>
+                        {% elif log.exercise == 'Жим штанги стоя' %}
+                            <i class="bi bi-arrow-up-circle"></i>
+                        {% elif log.exercise == 'Разведения в стороны' %}
+                            <i class="bi bi-arrows-expand"></i>
+                        {% elif log.exercise == 'Бицепс / Трицепс' %}
+                            <i class="bi bi-lightning"></i>
+                        {% elif log.exercise == 'Финишер HIIT' %}
+                            <i class="bi bi-stopwatch"></i>
+                        {% else %}
+                            <i class="bi bi-check-circle"></i>
+                        {% endif %}
+
+                        {{ log.exercise }}
+                        {% if log.weight or log.reps %}
+                        <span class="badge bg-success float-end">
+                            {% if log.weight %}{{ log.weight }} кг{% endif %}
+                            {% if log.reps %} × {{ log.reps }}{% endif %}
+                        </span>
+                        {% endif %}
+                        <br>
+                        <small class="text-secondary">{{ log.date }}</small>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-center text-muted mt-3">Пока нет записей</p>
+    {% endif %}
+
+    <a href="/" class="btn btn-secondary w-100 btn-lg shadow-sm">
+        <i class="bi bi-arrow-left"></i> Назад
+    </a>
+
+</div>
+
+<style>
+.dark-item {
+    background-color: #1f1f1f;
+    color: #f0f0f0;
+    border-color: #2a2a2a;
+}
+
+.workout-card {
+    animation: slideUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+
+.fade-in {
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+
+{% endblock %}

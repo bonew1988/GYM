@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4 text-center">
+
+    <h2 class="mb-4 fw-bold">Тренировка</h2>
+
+    <!-- ===== Блок: Тренировочные дни ===== -->
+    <div class="block p-3 mb-4 shadow-sm rounded bg-dark">
+        <h5 class="mb-3 text-light"><i class="bi bi-lightning-charge-fill"></i> Дни тренировок</h5>
+        <div class="d-grid gap-3">
+            <a class="btn btn-success btn-lg hover-scale" href="/workout/A">
+                День A
+            </a>
+            <a class="btn btn-success btn-lg hover-scale" href="/workout/B">
+                День B
+            </a>
+            <a class="btn btn-success btn-lg hover-scale" href="/workout/C">
+                День C
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== Блок: Графики ===== -->
+    <div class="block p-3 mb-4 shadow-sm rounded bg-dark">
+        <h5 class="mb-3 text-light"><i class="bi bi-bar-chart-line-fill"></i> Графики</h5>
+        <a class="btn btn-secondary btn-lg w-100 hover-scale" href="/graphs">
+            Посмотреть все графики
+        </a>
+    </div>
+
+    <!-- ===== Блок: История тренировок ===== -->
+    <div class="block p-3 mb-4 shadow-sm rounded bg-dark">
+        <h5 class="mb-3 text-light"><i class="bi bi-clock-history"></i> История</h5>
+        <a class="btn btn-outline-info btn-lg w-100 hover-scale" href="/history">
+            Посмотреть историю тренировок
+        </a>
+    </div>
+
+    <!-- ===== Блок: Рекомендации ===== -->
+    <div class="block p-3 mb-4 shadow-sm rounded bg-dark">
+        <h5 class="mb-3 text-light"><i class="bi bi-journal-text"></i> Рекомендации</h5>
+        <a class="btn btn-info btn-lg w-100 hover-scale" href="/recommendations">
+            Персональные рекомендации
+        </a>
+    </div>
+
+</div>
+
+<style>
+.hover-scale {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.hover-scale:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+.block {
+    border-left: 4px solid #2ecc71;
+}
+
+.block + .block {
+    border-left-color: #3498db;
+}
+
+.bg-dark {
+    background-color: #1f1f1f !important;
+}
+</style>
+{% endblock %}

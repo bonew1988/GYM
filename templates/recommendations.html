@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4 fade-in">
+
+    <h3 class="text-center fw-bold mb-4">
+        Персональная программа тренировок
+    </h3>
+
+    <!-- День A -->
+    <div class="card shadow-sm mb-3 workout-card">
+        <div class="card-body">
+            <h5>
+                <i class="bi bi-lightning-charge-fill text-success"></i>
+                День A — Верх тела + корпус
+            </h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item dark-item"><i class="bi bi-person-arms-up"></i> Подтягивания <span class="badge bg-success float-end">5 × 20–30</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-bar-chart-line-fill"></i> Жим лёжа <span class="badge bg-primary float-end">5 × 3–5 · 110–125 кг</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-arrow-down-up"></i> Тяга штанги в наклоне <span class="badge bg-secondary float-end">4 × 8–10 · 80–100 кг</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-arrows-angle-expand"></i> Жим гантелей под углом <span class="badge bg-secondary float-end">3 × 10–12 · 30–40 кг</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-shield-check"></i> Face Pull <span class="badge bg-info float-end">3 × 15–20</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-heart-pulse"></i> Пресс <span class="badge bg-dark float-end">4 подхода</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-arrows-angle-contract"></i> Планка / боковая планка <span class="badge bg-warning text-dark float-end">3 × 30–60 сек</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- День B -->
+    <div class="card shadow-sm mb-3 workout-card delay-1">
+        <div class="card-body">
+            <h5>
+                <i class="bi bi-diagram-3-fill text-danger"></i>
+                День B — Низ + задняя цепь + корпус
+            </h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item dark-item"><i class="bi bi-arrow-down"></i> Становая тяга <span class="badge bg-danger float-end">5 × 3–5 · 150–180 кг</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-universal-access"></i> Болгарские сплит-приседы <span class="badge bg-secondary float-end">4 × 8–12 · 20–30 кг</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-arrow-repeat"></i> Гиперэкстензия <span class="badge bg-info float-end">3 × 15 · +10–20 кг</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-person-arms-up"></i> Подтягивания (объём) <span class="badge bg-success float-end">6–8 × 10–15</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-caret-up-fill"></i> Икры <span class="badge bg-secondary float-end">4 × 15–20</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-arrow-up-square"></i> Мостик / ягодичный мост <span class="badge bg-warning text-dark float-end">3 × 12–15</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- День C -->
+    <div class="card shadow-sm mb-4 workout-card delay-2">
+        <div class="card-body">
+            <h5>
+                <i class="bi bi-fire text-warning"></i>
+                День C — Плечи, руки, метаболика + HIIT
+            </h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item dark-item"><i class="bi bi-arrow-up-circle"></i> Жим штанги стоя <span class="badge bg-primary float-end">5 × 5 · 60–75 кг</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-person-arms-up"></i> Подтягивания узкие <span class="badge bg-success float-end">4 × 12–15</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-arrows-expand"></i> Разведения в стороны <span class="badge bg-secondary float-end">4 × 15 · 10–14 кг</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-shield"></i> Тяга к лицу <span class="badge bg-info float-end">3 × 15–20</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-lightning"></i> Бицепс / Трицепс <span class="badge bg-dark float-end">3 × 10–12</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-heart-pulse"></i> Пресс / вакуум <span class="badge bg-warning text-dark float-end">3 × 20–30 сек</span></li>
+                <li class="list-group-item dark-item"><i class="bi bi-stopwatch"></i> Финишер HIIT <span class="badge bg-danger float-end">10 мин, 30/30</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Назад -->
+    <a href="/" class="btn btn-secondary w-100 btn-lg shadow-sm">
+        <i class="bi bi-arrow-left"></i> Назад
+    </a>
+
+</div>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="text-center mb-4">Все графики</h2>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    {% for day, exercises in data.items() %}
+    <h4 class="mt-4 mb-3">День {{ day }}</h4>
+    <div class="row">
+        {% for exercise, logs in exercises.items() %}
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card shadow-sm hover-scale">
+                <div class="card-body" style="height: 320px;">
+                    <!-- уникальный id canvas -->
+                    <canvas id="chart-{{ day }}-{{ loop.index0 }}" style="height:100%; width:100%;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function () {
+                const ctx = document.getElementById("chart-{{ day }}-{{ loop.index0 }}").getContext("2d");
+                const logsData = {{ logs | tojson
+            }};
+
+            if (!logsData || logsData.length === 0) return;
+
+            // Подготовка данных
+            const labels = logsData.map(l => l.date);
+            const weights = logsData.map(l => parseFloat(l.weight) || 0);
+            const reps = logsData.map(l => parseInt(l.reps) || 0);
+
+            // Фильтруем только корректные числа для безопасного масштаба
+            const safeWeights = weights.filter(w => !isNaN(w) && w >= 0);
+            const safeReps = reps.filter(r => !isNaN(r) && r >= 0);
+
+            // Градиенты
+            const gradientWeight = ctx.createLinearGradient(0, 0, 0, 320);
+            gradientWeight.addColorStop(0, 'rgba(46, 204, 113, 0.6)');
+            gradientWeight.addColorStop(1, 'rgba(46, 204, 113, 0.1)');
+
+            const gradientReps = ctx.createLinearGradient(0, 0, 0, 320);
+            gradientReps.addColorStop(0, 'rgba(52, 152, 219, 0.6)');
+            gradientReps.addColorStop(1, 'rgba(52, 152, 219, 0.1)');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Вес (кг)',
+                            data: weights,
+                            borderColor: 'rgba(46, 204, 113, 1)',
+                            backgroundColor: gradientWeight,
+                            yAxisID: 'y1',
+                            tension: 0.3,
+                            fill: true,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            spanGaps: true
+                        },
+                        {
+                            label: 'Повторы',
+                            data: reps,
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            backgroundColor: gradientReps,
+                            yAxisID: 'y2',
+                            tension: 0.3,
+                            fill: true,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            spanGaps: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    stacked: false,
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        title: { display: true, text: '{{ exercise }}' }
+                    },
+                    scales: {
+                        x: {
+                            type: 'category',
+                            ticks: { maxTicksLimit: 8 }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: 'Вес (кг)' },
+                            min: 0,
+                            suggestedMax: safeWeights.length ? Math.max(...safeWeights) + 10 : 100
+                        },
+                        y2: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: 'Повторы' },
+                            grid: { drawOnChartArea: false },
+                            min: 0,
+                            suggestedMax: safeReps.length ? Math.max(...safeReps) + 2 : 20
+                        }
+                    }
+                }
+            });
+            }) ();
+        </script>
+
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+    .hover-scale {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hover-scale:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+</style>
+{% endblock %}
